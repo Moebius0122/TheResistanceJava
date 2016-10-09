@@ -15,17 +15,28 @@ public class SimpleAI implements Player {
 	private int current_round=0;
 	private int current_vote_number=0;
 	private int wins_for_spies=0;
+	
+	/*A quasi 3D-Array. Contains entries in the form mission number (int), Leader (int, based on player_id, NOT the vote round number), Vote Round (int)
+	  and player votes (array of booleans, sorted by player_id). Access the values by the methods
+	  VotesForMissionMembers[roundnumber].getMission_mumber()
+	  VotesForMissionMembers[roundnumber].getLeader()
+	  VotesForMissionMembers[roundnumber].getVote_round()
+	  VotesForMissionMembers[roundnumber].getPlayer_votes()
+	*/
+	private VotesForMissionMembers[] all_votes=new VotesForMissionMembers[5];
 
-	public void updateGameState(Mission[] missions,int currentround,int currentvotenumber,int winsforspies){
+	public void updateGameState(Mission[] missions,int currentround,int currentvotenumber,int winsforspies,VotesForMissionMembers[] allvotes){
 		current_missions= missions;
 		current_round=currentround;
 		current_vote_number=currentvotenumber;
 		wins_for_spies=winsforspies;
+		all_votes=allvotes;
 	}
 	
 	public SimpleAI(int position) {
 		player_id = position;
 	}
+	
 	public int getPlayer_id() {
 		return player_id;
 	}
