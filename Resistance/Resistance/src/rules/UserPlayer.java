@@ -1,9 +1,9 @@
 package rules;
 
-public class YourAI implements Player {
-	
- 	// DON'T CHANGE THE IMPLEMENTATION OF THE CORE FEATURES
-	//Own variables
+public class UserPlayer implements Player {
+
+	// DON'T CHANGE THE IMPLEMENTATION OF THE CORE FEATURES
+			//Own variables
 	private boolean spy=false;
 	private int other_spy=-1;
 	private boolean[] on_mission={false,false,false,false,false};
@@ -24,7 +24,7 @@ public class YourAI implements Player {
 	  VotesForMissionMembers[roundnumber].getPlayer_votes()
 	*/
 	private VotesForMissionMembers[] all_votes=new VotesForMissionMembers[5];
-
+	
 	public void updateGameState(Mission[] missions,int currentround,int currentvotenumber,int winsforspies,VotesForMissionMembers[] allvotes){
 		current_missions= missions;
 		current_round=currentround;
@@ -33,7 +33,7 @@ public class YourAI implements Player {
 		all_votes=allvotes;
 	}
 
-	public YourAI(int position) {
+	public UserPlayer(int position) {
 		player_id = position;
 	}
 	
@@ -50,39 +50,28 @@ public class YourAI implements Player {
 		on_mission[roundnumber] = onmission;
 	}
 
-	
-	
-	//Here you need to specify the rules for your AI. The current game state is constantly updated into the variables above.
-	
-	
-	//This method determines the vote should the AI be on a mission.
-	public boolean voteFailure(){
-		return true;
-	}
-	
-	//This method selects 2 Players if the AI is the Leader for Mission 1 or 3. Make sure you are not selecting the same player twice. 
-	//The Array AllPlayers goes from 0 to 4.
-	public Player[] selectForTwo(Player[] AllPlayers) {
-		Player[] ForMission=new Player[2];
-		ForMission[0]=this;
-		ForMission[1]=AllPlayers[-1];
-		return ForMission;
-	}
-	
-	//This method selects 3 Players if the AI is the Leader for Mission 2, 4 or 5.
-	public Player[] selectForThree(Player[] AllPlayers) {
-		Player[] ForMission=new Player[3];
-		ForMission[0]=this;
-		ForMission[1]=AllPlayers[-1];
-		ForMission[2]=AllPlayers[-1];
-		return ForMission;
-	}
-	
-	
-	//This method determines whether or not the AI agrees with the selected players for the current mission.
-	public boolean voteForSelection(Player[] ForVote) {
-		return true;
+	@Override
+	public boolean voteFailure() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
+	@Override
+	public Player[] selectForTwo(Player[] all_players) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player[] selectForThree(Player[] all_players) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean voteForSelection(Player[] for_vote) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

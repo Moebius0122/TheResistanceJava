@@ -46,6 +46,8 @@ public class Entry {
 			return g_state;
 		}
 
+		//Deprecated, use PlayAGame in the GameState class instead
+		
 /*		public static void PlayAIGame(GameState TheState){
 			//Go through missions till the spies win or they run out of time.
 			while(!TheState.isSpyWin() && TheState.getRoundNumber()<5){
