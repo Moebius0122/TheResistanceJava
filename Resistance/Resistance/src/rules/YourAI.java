@@ -1,5 +1,7 @@
 package rules;
 
+import java.util.Scanner;
+
 public class YourAI implements Player {
 	
  	// DON'T CHANGE THE IMPLEMENTATION OF THE CORE FEATURES
@@ -10,7 +12,6 @@ public class YourAI implements Player {
 	private int player_id;
 	
 	//State of the Game
-	private Player[] players= new Player[5];
 	private Mission[] current_missions= new Mission[5];
 	private int current_round=0;
 	private int current_vote_number=0;
@@ -56,31 +57,31 @@ public class YourAI implements Player {
 	
 	
 	//This method determines the vote should the AI be on a mission.
-	public boolean voteFailure(){
+	public boolean voteFailure(Scanner scan){
 		return true;
 	}
 	
 	//This method selects 2 Players if the AI is the Leader for Mission 1 or 3. Make sure you are not selecting the same player twice. 
 	//The Array AllPlayers goes from 0 to 4.
-	public Player[] selectForTwo(Player[] AllPlayers) {
-		Player[] ForMission=new Player[2];
-		ForMission[0]=this;
-		ForMission[1]=AllPlayers[-1];
-		return ForMission;
+	public Player[] selectForTwo(Player[] AllPlayers, Scanner scan) {
+		Player[] selection_for_mission=new Player[2];
+		selection_for_mission[0]=this;
+		selection_for_mission[1]=AllPlayers[-1];
+		return selection_for_mission;
 	}
 	
 	//This method selects 3 Players if the AI is the Leader for Mission 2, 4 or 5.
-	public Player[] selectForThree(Player[] AllPlayers) {
-		Player[] ForMission=new Player[3];
-		ForMission[0]=this;
-		ForMission[1]=AllPlayers[-1];
-		ForMission[2]=AllPlayers[-1];
-		return ForMission;
+	public Player[] selectForThree(Player[] AllPlayers, Scanner scan) {
+		Player[] selection_for_mission=new Player[3];
+		selection_for_mission[0]=this;
+		selection_for_mission[1]=AllPlayers[-1];
+		selection_for_mission[2]=AllPlayers[-1];
+		return selection_for_mission;
 	}
 	
 	
 	//This method determines whether or not the AI agrees with the selected players for the current mission.
-	public boolean voteForSelection(Player[] ForVote) {
+	public boolean voteForSelection(Player[] ForVote, Scanner scan) {
 		return true;
 	}
 

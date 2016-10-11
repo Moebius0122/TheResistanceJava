@@ -1,6 +1,7 @@
 package rules;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class SimpleAI implements Player {
 	//Own variables
@@ -10,7 +11,6 @@ public class SimpleAI implements Player {
 	private int player_id;
 	
 	//State of the Game
-	private Player[] players= new Player[5];
 	private Mission[] current_missions= new Mission[5];
 	private int current_round=0;
 	private int current_vote_number=0;
@@ -50,12 +50,12 @@ public class SimpleAI implements Player {
 		on_mission[roundnumber] = onmission;
 	}
 
-	public boolean voteFailure(){
+	public boolean voteFailure(Scanner scan){
 		//if(spy) return true;
 		return false;
 	}
 
-	public Player[] selectForTwo(Player[] AllPlayers) {
+	public Player[] selectForTwo(Player[] AllPlayers, Scanner scan) {
 		Player[] ForMission=new Player[2];
 		ForMission[0]=this;
 		int SecondPlayer = 0;
@@ -74,7 +74,7 @@ public class SimpleAI implements Player {
 		return ForMission;
 	}
 
-	public Player[] selectForThree(Player[] AllPlayers) {
+	public Player[] selectForThree(Player[] AllPlayers, Scanner scan) {
 		Player[] ForMission=new Player[3];
 		ForMission[0]=this;
 		int SecondPlayer = 0;
@@ -103,7 +103,7 @@ public class SimpleAI implements Player {
 		return ForMission;
 	}
 
-	public boolean voteForSelection(Player[] ForVote) {
+	public boolean voteForSelection(Player[] ForVote, Scanner scan) {
 		return true;
 	}
 

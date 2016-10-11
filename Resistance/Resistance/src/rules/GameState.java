@@ -1,6 +1,7 @@
 package rules;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameState {
 	private Player[] players= new Player[5];
@@ -10,6 +11,7 @@ public class GameState {
 	private int current_vote_number=0;
 	private int wins_for_spies=0;
 	private boolean spy_win=false;
+	private Scanner scan = new Scanner(System.in);
 	
 	Random rand= new Random();
 	private int current_leader=rand.nextInt(5);
@@ -34,13 +36,13 @@ public class GameState {
 			UpdatePlayers();
 			Player[] current_vote;
 			if (current_round==0 || current_round==2){
-				current_vote=players[current_leader].selectForTwo(players);
+				current_vote=players[current_leader].selectForTwo(players, scan);
 				System.out.println("Player " +(current_leader+1) + " selected players " + (current_vote[0].getPlayer_id()+1) 
 									+ " and " + (current_vote[1].getPlayer_id()+1) + " for mission " + (current_round+1)+".");
 			} 
 			//Ruleset for missions with 3 players
 			else {
-				current_vote=players[current_leader].selectForThree(players);
+				current_vote=players[current_leader].selectForThree(players, scan);
 				System.out.println("Player " +(current_leader+1) + " selected players " + (current_vote[0].getPlayer_id()+1) 
 									+ ", " + (current_vote[1].getPlayer_id()+1) + " and " + (current_vote[2].getPlayer_id()+1) + " for mission " 
 									+ (current_round+1)+".");
@@ -50,8 +52,8 @@ public class GameState {
 			boolean[] player_votes= new boolean[5];
 			for (int i=0; i<5;i++){
 				//Store the player votes for updating the players and count players in favor.
-				player_votes[i]=players[i].voteForSelection(current_vote);
-				if(players[i].voteForSelection(current_vote)){
+				player_votes[i]=players[i].voteForSelection(current_vote, scan);
+				if(player_votes[i]){
 					System.out.println("Player " +(i+1) + " voted in favor of this selection.");
 					vote_majority=vote_majority+1;
 				}
@@ -59,7 +61,7 @@ public class GameState {
 					System.out.println("Player " +(i+1) + " voted against this selection.");
 				}
 			}
-			all_votes[current_round].UpdateVotes(current_round, current_leader, current_vote_number, player_votes);
+			//all_votes[current_round].UpdateVotes(current_round, current_leader, current_vote_number, player_votes);
 			UpdatePlayers();
 			if (vote_majority>=3){
 				//If the vote succeeds, advance the leader, update the missions with the voted players and set the players on mission.
@@ -71,7 +73,7 @@ public class GameState {
 				int votes_for_failure=0;
 				for (int j=0; j<players_on_mission.length;j++){
 					players_on_mission[j].setOn_mission(true, current_round);
-					if (players_on_mission[j].voteFailure()){
+					if (players_on_mission[j].voteFailure(scan)){
 						votes_for_failure=votes_for_failure+1;
 					}
 				}
@@ -98,6 +100,7 @@ public class GameState {
 				UpdatePlayers();
 				if(current_vote_number==5){ spy_win=true;
 				System.out.println("The spies have won the game due to the indecisiveness of the loyalists.");
+				scan.close();
 				return true;
 				}
 			}
@@ -105,6 +108,7 @@ public class GameState {
 			UpdatePlayers();
 			System.out.println();
 		}
+		scan.close();
 		return false;
 	}
 	

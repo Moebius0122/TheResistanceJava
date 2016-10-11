@@ -1,5 +1,8 @@
 package rules;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class UserPlayer implements Player {
 
 	// DON'T CHANGE THE IMPLEMENTATION OF THE CORE FEATURES
@@ -10,7 +13,6 @@ public class UserPlayer implements Player {
 	private int player_id;
 	
 	//State of the Game
-	private Player[] players= new Player[5];
 	private Mission[] current_missions= new Mission[5];
 	private int current_round=0;
 	private int current_vote_number=0;
@@ -51,26 +53,98 @@ public class UserPlayer implements Player {
 	}
 
 	@Override
-	public boolean voteFailure() {
-		// TODO Auto-generated method stub
+	public boolean voteFailure(Scanner scan) {
+		if(spy){
+			boolean selection_made = false;
+			do {
+	            try {
+	            	System.out.println("You fooled the loyalists and are on the mission. Do you feel it prudent to sabotage it? Enter 1 for sabotage, 0 for success.");
+	                Scanner n = new Scanner(System.in);
+	                int bn = n.nextInt();
+	                if (bn==1) {
+	                    System.out.println("You decided to sabotage the mission.");
+	                    selection_made=true;
+	                    //n.close();
+	                    return true;
+	                } else if (bn==0) {
+	                	System.out.println("You decided not to sabotage the mission.");
+	                	selection_made=true;
+	                	//n.close();
+	                	return false;
+	                }
+	                //n.close();
+	            } catch (InputMismatchException e) {
+	                System.out.println("Invalid input! Enter 1 for sabotage, 0 for success.");
+	            }
+	        } while (!selection_made);
+		}
+		else {
+			System.out.println("Since you are loyal to the cause, you did your best for the mission to succeed.");
+			return false; //Loyalists may not sabotage a mission.
+		}
 		return false;
 	}
-
-	@Override
-	public Player[] selectForTwo(Player[] all_players) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private int selectScanner(Player[] all_players, Scanner scan){
+		boolean selection_made = false;
+		do {
+            try {
+                int user_imput = scan.nextInt();
+                if(user_imput>=1 && user_imput<=5){
+                    System.out.println("You decided to nomitate player " + user_imput + " for the mission.");
+                    selection_made = true;
+                    return user_imput;
+                }
+                else System.out.println("Invalid input! Select player 1-5 by entering a number from 1 to 5.");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Select player 1-5 by entering a number from 1 to 5.");
+            }
+        } while (!selection_made);
+		return -1;
 	}
 
 	@Override
-	public Player[] selectForThree(Player[] all_players) {
-		// TODO Auto-generated method stub
-		return null;
+	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
+		System.out.println("You are the current leader and must nominate 2 members of the resistance. Who is your first nominee? Select player 1-5 by entering a number from 1 to 5.");
+		Player[] selection_for_mission= new Player[2];
+		selection_for_mission[0]= all_players[selectScanner(all_players, scan)];
+		System.out.println("Who is your second nominee? Select player 1-5 by entering a number from 1 to 5.");
+		selection_for_mission[1]= all_players[selectScanner(all_players, scan)];
+		return selection_for_mission;
 	}
 
 	@Override
-	public boolean voteForSelection(Player[] for_vote) {
-		// TODO Auto-generated method stub
+	public Player[] selectForThree(Player[] all_players, Scanner scan) {
+		System.out.println("You are the current leader and must nominate 2 members of the resistance. Who is your first nominee? Select player 1-5 by entering a number from 1 to 5.");
+		Player[] selection_for_mission= new Player[3];
+		selection_for_mission[0]= all_players[selectScanner(all_players, scan)];
+		System.out.println("Who is your second nominee? Select player 1-5 by entering a number from 1 to 5.");
+		selection_for_mission[1]= all_players[selectScanner(all_players, scan)];
+		System.out.println("Who is your third nominee? Select player 1-5 by entering a number from 1 to 5.");
+		selection_for_mission[2]= all_players[selectScanner(all_players, scan)];
+		return selection_for_mission;
+	}
+
+	@Override
+	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
+		boolean selection_made = false;
+		while (!selection_made) {
+            try {
+            	System.out.println("Do you approve the leaders selection for the next mission? Enter 1 for yes, 0 for no.");
+                int user_input = scan.nextInt();
+                if (user_input==1) {
+                    System.out.println("You decided to approve the leaders selection.");
+                    selection_made=true;
+                    return true;
+                } else if (user_input==0) {
+                	System.out.println("You decided not to approve the leaders selection.");
+                	selection_made=true;
+                	return false;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter 1 for yes, 0 for no.");
+            }
+        }
 		return false;
 	}
 
