@@ -7,14 +7,15 @@ public class Entry {
 	
 		//System.out.println(State.isSpyWin());
 		//PlayAIGame(InitGame());
-		GameState the_state=InitGame();
+		//GameState the_state=initAIGame();
+		GameState the_state=initOnePlayerGame();
 		boolean spy_win=the_state.PlayAGame();
 		if(!spy_win){
 			System.out.println("The resistance succeeded! The filthy spies couldn't sabotage enough missions.");
 		}
 	}
 	
-		public static GameState InitGame(){
+		public static GameState initAIGame(){
 			//Initialize all needed data structures
 			SimpleAI p_one=new SimpleAI(0);
 			SimpleAI p_two=new SimpleAI(1);
@@ -46,7 +47,40 @@ public class Entry {
 			return g_state;
 		}
 
-		//Deprecated, use PlayAGame in the GameState class instead
+		public static GameState initOnePlayerGame(){
+			//Initialize all needed data structures
+			UserPlayer p_one=new UserPlayer(0);
+			SimpleAI p_two=new SimpleAI(1);
+			SimpleAI p_three=new SimpleAI(2);
+			SimpleAI p_four=new SimpleAI(3);
+			SimpleAI p_five=new SimpleAI(4);
+			Player[] players= {p_one,p_two,p_three,p_four,p_five};			
+			MissionForTwo m_one=new MissionForTwo(1);
+			MissionForThree m_two=new MissionForThree(2);
+			MissionForTwo m_three=new MissionForTwo(3);
+			MissionForThree m_four=new MissionForThree(4);
+			MissionForThree m_five=new MissionForThree(5);
+			Mission[] missions={m_one,m_two,m_three,m_four,m_five};
+			GameState g_state=new GameState(players,missions);
+
+			int spy_one, spy_two=0;
+		
+			//Set the spies and let them know of each other
+			Random rand= new Random();
+			spy_one = rand.nextInt(5);
+			while(spy_two==spy_one||spy_two==0){
+				spy_two = rand.nextInt(5);
+			}
+			//System.out.println("Player "+ (spy_one+1) +" is a filthy spy!");
+			//System.out.println("Player "+ (spy_two+1) +" is a filthy spy!");
+			players[spy_one].setSpy(true,spy_two);
+			players[spy_two].setSpy(true,spy_one);
+			
+			return g_state;
+		}
+
+		
+		//Deprecated, use playAGame in the GameState class instead
 		
 /*		public static void PlayAIGame(GameState TheState){
 			//Go through missions till the spies win or they run out of time.
