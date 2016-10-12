@@ -11,7 +11,6 @@ public class GameState {
 	private int current_vote_number=0;
 	private int wins_for_spies=0;
 	private boolean spy_win=false;
-	private Scanner scan = new Scanner(System.in);
 	
 	Random rand= new Random();
 	private int current_leader=rand.nextInt(5);
@@ -28,7 +27,7 @@ public class GameState {
 	}
 
 	
-	public boolean PlayAGame(){
+	public boolean PlayAGame(Scanner scan){
 		System.out.println("Player "+ (current_leader+1) +" begins as the leader.");
 		//Go through missions till the spies win or they run out of time.
 		while(!spy_win && current_round<5){
@@ -47,11 +46,10 @@ public class GameState {
 									+ ", " + (current_vote[1].getPlayer_id()+1) + " and " + (current_vote[2].getPlayer_id()+1) + " for mission " 
 									+ (current_round+1)+".");
 			}
-			//boolean[] VoteResults = new boolean[5];
 			int vote_majority=0;
 			boolean[] player_votes= new boolean[5];
 			for (int i=0; i<5;i++){
-				//Store the player votes for updating the players and count players in favor.
+				//Count players sabotaging and store the count.
 				player_votes[i]=players[i].voteForSelection(current_vote, scan);
 				if(player_votes[i]){
 					System.out.println("Player " +(i+1) + " voted in favor of this selection.");
@@ -66,27 +64,13 @@ public class GameState {
 			if (vote_majority>=3){
 				//If the vote succeeds, advance the leader, update the missions with the voted players and set the players on mission.
 				System.out.println("The vote succeeded. The selected players will go on the mission.");
+                System.out.println("");
 				current_leader=(current_leader+1)%5;
 				UpdatePlayers();
-				missions[current_round].setPlayersOnMission(current_vote);
-				Player[] players_on_mission =missions[current_round].getPlayersOnMission();
-				int votes_for_failure=0;
-				for (int j=0; j<players_on_mission.length;j++){
-					players_on_mission[j].setOn_mission(true, current_round);
-					if (players_on_mission[j].voteFailure(scan)){
-						votes_for_failure=votes_for_failure+1;
-					}
-				}
-				if (votes_for_failure==0){
-					System.out.println("Mission "+ (current_round+1) +" was a full success!");
-				}
-				else{
-					missions[current_round].setSpyWin(true);
+				if(missions[current_round].runMission(current_vote, scan)){
 					wins_for_spies=wins_for_spies+1;
-					System.out.println("Mission "+ (current_round+1) +" failed! " + votes_for_failure + " player(s) on mission sabotaged it!");
-					UpdatePlayers();
 				}
-				votes_for_failure=0; //Reset VoteFail for next Mission
+				UpdatePlayers();
 				if (wins_for_spies==3){
 					spy_win=true;
 					System.out.println("The spies have won the game by failing the majority of the missions!");
@@ -104,11 +88,13 @@ public class GameState {
 				return true;
 				}
 			}
+			if (current_round-wins_for_spies==3 ){
+				return false;
+			}
 			current_round=current_round+1;
 			UpdatePlayers();
 			System.out.println();
 		}
-		scan.close();
 		return false;
 	}
 	

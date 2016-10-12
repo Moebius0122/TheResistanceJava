@@ -3,76 +3,39 @@ package rules;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class UserPlayer implements Player {
-
-	// DON'T CHANGE THE IMPLEMENTATION OF THE CORE FEATURES
-			//Own variables
-	private boolean spy=false;
-	private int other_spy=-1;
-	private boolean[] on_mission={false,false,false,false,false};
-	private int player_id;
-	
-	//State of the Game
-	private Mission[] current_missions= new Mission[5];
-	private int current_round=0;
-	private int current_vote_number=0;
-	private int wins_for_spies=0;
-	
-	/*A quasi 3D-Array. Contains entries in the form mission number (int), Leader (int, based on player_id, NOT the vote round number), Vote Round (int)
-	  and player votes (array of booleans, sorted by player_id). Access the values by the methods
-	  VotesForMissionMembers[roundnumber].getMission_mumber()
-	  VotesForMissionMembers[roundnumber].getLeader()
-	  VotesForMissionMembers[roundnumber].getVote_round()
-	  VotesForMissionMembers[roundnumber].getPlayer_votes()
-	*/
-	private VotesForMissionMembers[] all_votes=new VotesForMissionMembers[5];
-	
-	public void updateGameState(Mission[] missions,int currentround,int currentvotenumber,int winsforspies,VotesForMissionMembers[] allvotes){
-		current_missions= missions;
-		current_round=currentround;
-		current_vote_number=currentvotenumber;
-		wins_for_spies=winsforspies;
-		all_votes=allvotes;
+public class UserPlayer extends Player {
+	public UserPlayer(boolean isspy, int playerid, int otherspy) {
+		super(isspy, playerid, otherspy);
+		if(is_spy){
+			System.out.println("Player "+ (player_id+1) + ", you are a spy inside the resistance.");
+			System.out.println("You and "+ (other_spy+1) + " must cause 3 missions to fail, or delay the loyalist in their decision progress 5 times.");
+			System.out.println("Good luck!");
+		}else{
+			System.out.println("Player "+ (player_id+1) + ", you are a loyal member of the resistance.");
+			System.out.println("We know that two spies have managed to infiltrate our cell and are looking to sabotage our missions.");
+			System.out.println("Make sure you succeed in at least 3 missions!");
+			System.out.println("Also, if you take more than 5 attempts to form a team for a missions, our cover will be blown and we will loose the fight!");
+			System.out.println("Good luck!");
+		}
 	}
 
-	public UserPlayer(int position) {
-		player_id = position;
-	}
-	
-	public int getPlayer_id() {
-		return player_id;
-	}
 
-	public void setSpy(boolean spy_init, int otherspy_init) {
-		spy = spy_init;
-		other_spy=otherspy_init;
-	}
-
-	public void setOn_mission(boolean onmission, int roundnumber) {
-		on_mission[roundnumber] = onmission;
-	}
-
-	@Override
 	public boolean voteFailure(Scanner scan) {
-		if(spy){
+		if(is_spy){
 			boolean selection_made = false;
 			do {
 	            try {
 	            	System.out.println("You fooled the loyalists and are on the mission. Do you feel it prudent to sabotage it? Enter 1 for sabotage, 0 for success.");
-	                Scanner n = new Scanner(System.in);
-	                int bn = n.nextInt();
-	                if (bn==1) {
+	                int player_decision = scan.nextInt();
+	                if (player_decision==1) {
 	                    System.out.println("You decided to sabotage the mission.");
 	                    selection_made=true;
-	                    //n.close();
 	                    return true;
-	                } else if (bn==0) {
+	                } else if (player_decision==0) {
 	                	System.out.println("You decided not to sabotage the mission.");
 	                	selection_made=true;
-	                	//n.close();
 	                	return false;
 	                }
-	                //n.close();
 	            } catch (InputMismatchException e) {
 	                System.out.println("Invalid input! Enter 1 for sabotage, 0 for success.");
 	            }
@@ -141,6 +104,7 @@ public class UserPlayer implements Player {
                 	selection_made=true;
                 	return false;
                 }
+                else System.out.println("Invalid input! Enter 1 for yes, 0 for no.");
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Enter 1 for yes, 0 for no.");
             }
