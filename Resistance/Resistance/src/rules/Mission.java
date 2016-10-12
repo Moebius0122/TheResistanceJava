@@ -1,32 +1,45 @@
 package rules;
 
+import java.util.Scanner;
+
 public class Mission {
-	private int MissionNumber;
-	private boolean SpyWin=false;
-	private Player[] PlayersOnMission;
+	private final int mission_number;
+	private boolean spy_win=false;
+	private Player[] players_on_mission;
 			
-	public Mission(int missionNumber) {
-		MissionNumber = missionNumber;
+	public Mission(int missionnumber) {
+		mission_number = missionnumber;
 	}
 	
-	public int getMissionNumber() {
-		return MissionNumber;
-	}
-	public void setMissionNumber(int missionNumber) {
-		MissionNumber = missionNumber;
+	public int getMission_Number() {
+		return mission_number;
 	}
 	public boolean isSpyWin() {
-		return SpyWin;
+		return spy_win;
 	}
-	public void setSpyWin(boolean spyWin) {
-		SpyWin = spyWin;
-	}
-
 	public Player[] getPlayersOnMission() {
-		return PlayersOnMission;
+		return players_on_mission;
 	}
 
-	public void setPlayersOnMission(Player[] playersOnMission) {
-		PlayersOnMission = playersOnMission;
+	public boolean runMission(Player[] on_mission, Scanner scan){
+		players_on_mission=on_mission;
+		int votes_for_failure=0;
+		for (int j=0; j<players_on_mission.length;j++){
+			if (players_on_mission[j].voteFailure(scan)){
+				votes_for_failure=votes_for_failure+1;
+			}
+		}
+		if (votes_for_failure==0){
+			System.out.println("Mission "+ (mission_number) +" was a full success!");
+            System.out.println("");
+			return false;
+		}
+		else{
+			spy_win=true;
+			System.out.println("Mission "+ (mission_number) +" failed! " + votes_for_failure + " player(s) on mission sabotaged it!");
+            System.out.println("");
+			return true;
+		}
 	}
+	
 }

@@ -7,16 +7,15 @@ import java.util.Scanner;
 public class Player implements PlayerInterface {
 	
 	//Own variables
-	private final boolean is_spy;
-	private final int other_spy;
-	private final int player_id;
-	private boolean[] on_mission={false,false,false,false,false};
+	protected final boolean is_spy;
+	protected final int other_spy;
+	protected final int player_id;
 	
 	//State of the Game
-	private Mission[] current_missions= new Mission[5];
-	private int current_round=0;
-	private int current_vote_number=0;
-	private int wins_for_spies=0;
+	protected Mission[] current_missions= new Mission[5];
+	protected int current_round=0;
+	protected int current_vote_number=0;
+	protected int wins_for_spies=0;
 	
 	/*A quasi 3D-Array. Contains entries in the form mission number (int), Leader (int, based on player_id, NOT the vote round number), Vote Round (int)
 	  and player votes (array of booleans, sorted by player_id). Access the values by the methods
@@ -25,7 +24,7 @@ public class Player implements PlayerInterface {
 	  VotesForMissionMembers[roundnumber].getVote_round()
 	  VotesForMissionMembers[roundnumber].getPlayer_votes()
 	*/
-	private VotesForMissionMembers[] all_votes=new VotesForMissionMembers[5];
+	protected VotesForMissionMembers[] all_votes=new VotesForMissionMembers[5];
 
 
 	public Player(boolean isspy, int playerid, int otherspy) {
@@ -34,7 +33,6 @@ public class Player implements PlayerInterface {
 		other_spy=otherspy;
 	}
 
-	@Override
 	public void updateGameState(Mission[] missions, int currentround, int currentvotenumber, int winsforspies,
 			VotesForMissionMembers[] allvotes) {
 		current_missions= missions;
@@ -44,29 +42,26 @@ public class Player implements PlayerInterface {
 		all_votes=allvotes;
 	}
 
-	@Override
+	//Every method down below needs to be implemented by the subclasses.
+	
 	public int getPlayer_id() {
-		// TODO Auto-generated method stub
 		return player_id;
 	}
 
 	public boolean voteFailure(Scanner scan) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public PlayerInterface[] selectForTwo(PlayerInterface[] all_players, Scanner scan) {
-		// TODO Auto-generated method stub
+
+	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
 		return null;
 	}
 
-	public PlayerInterface[] selectForThree(PlayerInterface[] all_players, Scanner scan) {
-		// TODO Auto-generated method stub
+	public Player[] selectForThree(Player[] all_players, Scanner scan) {
 		return null;
 	}
 
-	public boolean voteForSelection(PlayerInterface[] for_vote, Scanner scan) {
-		// TODO Auto-generated method stub
+	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
 		return false;
 	}
 
