@@ -27,6 +27,7 @@ public class UserPlayer extends Player {
 	}
 
 
+	@Override
 	public boolean voteFailure(Scanner scan) {
 		
 		if(is_spy){

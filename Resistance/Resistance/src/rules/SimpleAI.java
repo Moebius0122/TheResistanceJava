@@ -9,11 +9,13 @@ public class SimpleAI extends Player {
 		super(isspy, playerid, otherspy);
 		// TODO Auto-generated constructor stub
 	}
+	@Override
 	public boolean voteFailure(Scanner scan){
 		if(is_spy) return true;
 		return false;
 	}
 
+	@Override
 	public Player[] selectForTwo(Player[] AllPlayers, Scanner scan) {
 		Player[] ForMission=new Player[2];
 		ForMission[0]=this;
@@ -33,6 +35,7 @@ public class SimpleAI extends Player {
 		return ForMission;
 	}
 
+	@Override
 	public Player[] selectForThree(Player[] AllPlayers, Scanner scan) {
 		Player[] ForMission=new Player[3];
 		ForMission[0]=this;
@@ -63,6 +66,7 @@ public class SimpleAI extends Player {
 		return ForMission;
 	}
 
+	@Override
 	public boolean voteForSelection(Player[] ForVote, Scanner scan) {
 		return true;
 	}

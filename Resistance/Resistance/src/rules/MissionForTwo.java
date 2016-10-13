@@ -8,6 +8,7 @@ public class MissionForTwo extends Mission {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public Player[] getPlayersOnMission() {
 		return PlayersOnMission;
 	}

@@ -35,6 +35,7 @@ public class Player implements PlayerInterface {
 		
 	}
 
+	@Override
 	public void updateGameState(Mission[] missions, int currentround, int currentvotenumber, int winsforspies,
 			VotesForMissionMembers[] allvotes) {
 		
@@ -48,12 +49,14 @@ public class Player implements PlayerInterface {
 
 	//Every method down below needs to be implemented by the subclasses.
 	
+	@Override
 	public int getPlayer_id() {
 		
 		return player_id;
 		
 	}
 
+	@Override
 	public boolean voteFailure(Scanner scan) {
 		
 		return false;
@@ -61,18 +64,21 @@ public class Player implements PlayerInterface {
 	}
 
 
+	@Override
 	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
 		
 		return null;
 		
 	}
 
+	@Override
 	public Player[] selectForThree(Player[] all_players, Scanner scan) {
 		
 		return null;
 		
 	}
 
+	@Override
 	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
 		
 		return false;
