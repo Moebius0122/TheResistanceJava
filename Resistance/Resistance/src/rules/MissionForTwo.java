@@ -13,8 +13,4 @@ public class MissionForTwo extends Mission {
 		return PlayersOnMission;
 	}
 
-	public void setPlayersOnMission(Player[] playersOnMission) {
-		PlayersOnMission = playersOnMission;
-	}
-
 }

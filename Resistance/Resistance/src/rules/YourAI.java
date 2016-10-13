@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class YourAI extends Player {
 
  	public YourAI(boolean isspy, int playerid, int otherspy) {
+ 		
 		super(isspy, playerid, otherspy);
+		
 	}
 
 	//Here you need to specify the rules for your AI. The current game state is constantly updated into the variables above.
