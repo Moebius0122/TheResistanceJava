@@ -4,7 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserPlayer extends Player {
+	
+	
 	public UserPlayer(boolean isspy, int playerid, int otherspy) {
+		
 		super(isspy, playerid, otherspy);
 		
 		if(is_spy){
@@ -27,6 +30,7 @@ public class UserPlayer extends Player {
 	}
 
 
+	@Override
 	public boolean voteFailure(Scanner scan) {
 		
 		if(is_spy){
@@ -82,6 +86,7 @@ public class UserPlayer extends Player {
 		
 	}
 	
+	
 	private int selectScanner(Player[] all_players, Scanner scan){
 		
 		boolean selection_made = false;
@@ -115,6 +120,7 @@ public class UserPlayer extends Player {
 		return -1;
 	}
 
+	
 	@Override
 	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
 		
@@ -131,6 +137,7 @@ public class UserPlayer extends Player {
 		return selection_for_mission;
 	}
 
+	
 	@Override
 	public Player[] selectForThree(Player[] all_players, Scanner scan) {
 		
@@ -151,6 +158,7 @@ public class UserPlayer extends Player {
 		return selection_for_mission;
 	}
 
+	
 	@Override
 	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
 		
