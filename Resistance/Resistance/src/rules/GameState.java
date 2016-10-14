@@ -1,5 +1,6 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,23 +46,23 @@ public class GameState {
 			
 			UpdatePlayers();
 			
-			Player[] current_vote;
+			ArrayList<Player> current_vote = new ArrayList<Player>();;
 			
 			//Ruleset for missions with 2 players
 			if (current_round == 0 || current_round == 2){
 				
 				current_vote=players[current_leader].selectForTwo(players, scan);
 				
-				System.out.println("Player " + (current_leader + 1) + " selected players " + (current_vote[0].getPlayer_id() + 1) 
-									+ " and " + (current_vote[1].getPlayer_id() + 1) + " for mission " + (current_round + 1)+".");
+				System.out.println("Player " + (current_leader + 1) + " selected players " + (current_vote.get(0).getPlayer_id() + 1)
+									+ " and " + (current_vote.get(1).getPlayer_id() + 1) + " for mission " + (current_round + 1)+".");
 			} 
 			
 			//Ruleset for missions with 3 players
 			else {
 				current_vote=players[current_leader].selectForThree(players, scan);
 				
-				System.out.println("Player " + (current_leader + 1) + " selected players " + (current_vote[0].getPlayer_id() + 1) 
-									+ ", " + (current_vote[1].getPlayer_id() + 1) + " and " + (current_vote[2].getPlayer_id() + 1) + " for mission " 
+				System.out.println("Player " + (current_leader + 1) + " selected players " + (current_vote.get(0).getPlayer_id() + 1) 
+									+ ", " + (current_vote.get(1).getPlayer_id() + 1) + " and " + (current_vote.get(2).getPlayer_id() + 1) + " for mission " 
 									+ (current_round + 1)+".");
 			}
 			

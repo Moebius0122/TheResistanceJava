@@ -1,5 +1,6 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,11 +24,11 @@ public class SimpleAI extends Player {
 
 	
 	@Override
-	public Player[] selectForTwo(Player[] AllPlayers, Scanner scan) {
+	public ArrayList<Player> selectForTwo(Player[] AllPlayers, Scanner scan) {
 		
-		Player[] ForMission = new Player[2];
+		ArrayList<Player> ForMission = new ArrayList<Player>(2);
 		
-		ForMission[0] = this;
+		ForMission.add(this);
 		
 		int SecondPlayer = -1;
 		
@@ -53,7 +54,7 @@ public class SimpleAI extends Player {
 			
 		}
 		
-		ForMission[1] = AllPlayers[SecondPlayer];
+		ForMission.add(AllPlayers[SecondPlayer]);
 		
 		return ForMission;
 		
@@ -61,11 +62,11 @@ public class SimpleAI extends Player {
 
 	
 	@Override
-	public Player[] selectForThree(Player[] AllPlayers, Scanner scan) {
+	public ArrayList<Player> selectForThree(Player[] AllPlayers, Scanner scan) {
 		
-		Player[] ForMission = new Player[3];
+		ArrayList<Player> ForMission = new ArrayList<Player>(3);
 		
-		ForMission[0] = this;
+		ForMission.add(this);
 		
 		int SecondPlayer = -1;
 		
@@ -102,9 +103,9 @@ public class SimpleAI extends Player {
 		
 		}
 		
-		ForMission[1] = AllPlayers[SecondPlayer];
+		ForMission.add(AllPlayers[SecondPlayer]);
 		
-		ForMission[2] = AllPlayers[ThirdPlayer];
+		ForMission.add(AllPlayers[ThirdPlayer]);
 		
 		return ForMission;
 		
@@ -112,7 +113,7 @@ public class SimpleAI extends Player {
 
 	
 	@Override
-	public boolean voteForSelection(Player[] ForVote, Scanner scan) {
+	public boolean voteForSelection(ArrayList<Player> ForVote, Scanner scan) {
 		
 		return true;
 		

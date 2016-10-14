@@ -1,12 +1,13 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mission {
 	
 	private final int mission_number;
 	private boolean spy_win = false;
-	private Player[] players_on_mission;
+	private ArrayList<Player> players_on_mission = new ArrayList<Player>();
 	
 
 	
@@ -30,7 +31,7 @@ public class Mission {
 		
 	}
 	
-	public Player[] getPlayersOnMission() {
+	public ArrayList<Player> getPlayersOnMission() {
 		
 		return players_on_mission;
 		
@@ -38,15 +39,15 @@ public class Mission {
 	
 
 	
-	public boolean runMission(Player[] on_mission, Scanner scan){
+	public boolean runMission(ArrayList<Player> on_mission, Scanner scan){
 		
 		players_on_mission = on_mission;
 		
 		int votes_for_failure = 0;
 		
-		for (int j = 0; j < players_on_mission.length; j++){
+		for (int j = 0; j < players_on_mission.size(); j++){
 			
-			if (players_on_mission[j].voteFailure(scan)){
+			if (players_on_mission.get(j).voteFailure(scan)){
 				
 				votes_for_failure = votes_for_failure + 1;
 				

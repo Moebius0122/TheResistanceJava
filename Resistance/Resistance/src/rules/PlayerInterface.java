@@ -1,5 +1,6 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public interface PlayerInterface {
@@ -14,12 +15,12 @@ public interface PlayerInterface {
 	boolean voteFailure(Scanner scan);
 	
 	
-	Player[] selectForTwo(Player[] all_players, Scanner scan);
+	ArrayList<Player> selectForTwo(Player[] all_players, Scanner scan);
 	
 	
-	Player[] selectForThree(Player[] all_players, Scanner scan);
+	ArrayList<Player> selectForThree(Player[] all_players, Scanner scan);
 	
 	
-	boolean voteForSelection(Player[] for_vote, Scanner scan);
+	boolean voteForSelection(ArrayList<Player> for_vote, Scanner scan);
 	
 }

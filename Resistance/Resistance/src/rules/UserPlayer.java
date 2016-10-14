@@ -1,5 +1,6 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -122,45 +123,45 @@ public class UserPlayer extends Player {
 
 	
 	@Override
-	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
+	public ArrayList<Player> selectForTwo(Player[] all_players, Scanner scan) {
 		
 		System.out.println("You are the current leader and must nominate 2 members of the resistance. Who is your first nominee? Select player 1-5 by entering a number from 1 to 5.");
 		
-		Player[] selection_for_mission = new Player[2];
+		ArrayList<Player> selection_for_mission = new ArrayList<Player>(2);
 		
-		selection_for_mission[0] = all_players[selectScanner(all_players, scan)];
+		selection_for_mission.add(all_players[selectScanner(all_players, scan)]);
 		
 		System.out.println("Who is your second nominee? Select player 1-5 by entering a number from 1 to 5.");
 		
-		selection_for_mission[1] = all_players[selectScanner(all_players, scan)];
+		selection_for_mission.add(all_players[selectScanner(all_players, scan)]);
 		
 		return selection_for_mission;
 	}
 
 	
 	@Override
-	public Player[] selectForThree(Player[] all_players, Scanner scan) {
+	public ArrayList<Player> selectForThree(Player[] all_players, Scanner scan) {
 		
 		System.out.println("You are the current leader and must nominate 2 members of the resistance. Who is your first nominee? Select player 1-5 by entering a number from 1 to 5.");
 		
-		Player[] selection_for_mission = new Player[3];
+		ArrayList<Player> selection_for_mission = new ArrayList<Player>(3);
 		
-		selection_for_mission[0]= all_players[selectScanner(all_players, scan)];
+		selection_for_mission.add(all_players[selectScanner(all_players, scan)]);
 		
 		System.out.println("Who is your second nominee? Select player 1-5 by entering a number from 1 to 5.");
 		
-		selection_for_mission[1]= all_players[selectScanner(all_players, scan)];
+		selection_for_mission.add(all_players[selectScanner(all_players, scan)]);
 		
 		System.out.println("Who is your third nominee? Select player 1-5 by entering a number from 1 to 5.");
 		
-		selection_for_mission[2]= all_players[selectScanner(all_players, scan)];
+		selection_for_mission.add(all_players[selectScanner(all_players, scan)]);
 		
 		return selection_for_mission;
 	}
 
 	
 	@Override
-	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
+	public boolean voteForSelection(ArrayList<Player> for_vote, Scanner scan) {
 		
 		boolean selection_made = false;
 		

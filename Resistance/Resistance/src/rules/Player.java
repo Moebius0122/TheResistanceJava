@@ -1,5 +1,6 @@
 package rules;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -69,21 +70,21 @@ abstract public class Player implements PlayerInterface {
 
 
 	@Override
-	public Player[] selectForTwo(Player[] all_players, Scanner scan) {
+	public ArrayList<Player> selectForTwo(Player[] all_players, Scanner scan) {
 		
 		return null;
 		
 	}
 
 	@Override
-	public Player[] selectForThree(Player[] all_players, Scanner scan) {
+	public ArrayList<Player> selectForThree(Player[] all_players, Scanner scan) {
 		
 		return null;
 		
 	}
 
 	@Override
-	public boolean voteForSelection(Player[] for_vote, Scanner scan) {
+	public boolean voteForSelection(ArrayList<Player> for_vote, Scanner scan) {
 		
 		return false;
 		
