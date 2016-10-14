@@ -3,24 +3,19 @@ package rules;
 import java.util.Scanner;
 
 
-//"Abstract" superclass that handles everything but the actual decision making.
-public class Player implements PlayerInterface {
+//Abstract superclass that handles everything but the actual decision making.
+abstract public class Player implements PlayerInterface {
 	
 	//Own variables
 	protected final boolean is_spy;
-	
 	protected final int other_spy;
-	
 	protected final int player_id;
 	
 	
 	//State of the Game
 	protected Mission[] current_missions= new Mission[5];
-	
 	protected int current_round = 0;
-	
 	protected int current_vote_number = 0;
-	
 	protected int wins_for_spies = 0;
 	
 	
@@ -56,6 +51,7 @@ public class Player implements PlayerInterface {
 
 	//Every method down below needs to be implemented by the subclasses.
 	
+	
 	@Override
 	public int getPlayer_id() {
 		
@@ -63,6 +59,7 @@ public class Player implements PlayerInterface {
 		
 	}
 
+	
 	@Override
 	public boolean voteFailure(Scanner scan) {
 		
