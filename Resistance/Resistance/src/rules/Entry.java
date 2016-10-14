@@ -312,11 +312,11 @@ public class Entry {
 			
 
 			
-			MissionForTwo m_one = new MissionForTwo(1);
-			MissionForThree m_two = new MissionForThree(2);
-			MissionForTwo m_three = new MissionForTwo(3);
-			MissionForThree m_four = new MissionForThree(4);
-			MissionForThree m_five = new MissionForThree(5);
+			Mission m_one = new Mission(1);
+			Mission m_two = new Mission(2);
+			Mission m_three = new Mission(3);
+			Mission m_four = new Mission(4);
+			Mission m_five = new Mission(5);
 			Mission[] missions = {m_one,m_two,m_three,m_four,m_five};
 			GameState g_state = new GameState(players,missions);
 			
