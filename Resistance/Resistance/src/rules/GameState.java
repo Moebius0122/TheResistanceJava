@@ -29,10 +29,11 @@ public class GameState {
 	}
 	
 	
-	public GameState(Player[] PlayersFromInit, Mission[] MissionsFromInit) {
+	public GameState(Player[] players_from_init, Mission[] missions_from_init, VotesForMissionMembers[] votes) {
 		
-		players = PlayersFromInit;
-		missions = MissionsFromInit;
+		players = players_from_init;
+		missions = missions_from_init;
+		all_votes = votes;
 		
 	}
 
@@ -91,7 +92,7 @@ public class GameState {
 				
 			}
 			
-			//all_votes[current_round].UpdateVotes(current_round, current_leader, current_vote_number, player_votes);
+			all_votes[current_round].UpdateVotes(current_round, current_leader, current_vote_number, player_votes);
 			
 			UpdatePlayers();
 			

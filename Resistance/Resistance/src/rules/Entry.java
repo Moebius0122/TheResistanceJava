@@ -318,7 +318,16 @@ public class Entry {
 			Mission m_four = new Mission(4);
 			Mission m_five = new Mission(5);
 			Mission[] missions = {m_one,m_two,m_three,m_four,m_five};
-			GameState g_state = new GameState(players,missions);
+			
+			
+			VotesForMissionMembers vote_one = new VotesForMissionMembers();
+			VotesForMissionMembers vote_two = new VotesForMissionMembers();
+			VotesForMissionMembers vote_three = new VotesForMissionMembers();
+			VotesForMissionMembers vote_four = new VotesForMissionMembers();
+			VotesForMissionMembers vote_five = new VotesForMissionMembers();
+			VotesForMissionMembers[] votes = {vote_one,vote_two,vote_three,vote_four,vote_five};
+			
+			GameState g_state = new GameState(players, missions, votes);
 			
 
 			
