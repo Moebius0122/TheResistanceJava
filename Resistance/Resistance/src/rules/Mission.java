@@ -38,7 +38,7 @@ public class Mission {
 	}
 	
 
-	
+	//Runs a mission with the players on it. The scanner is needed in case a selected player is human.
 	public boolean runMission(ArrayList<Player> on_mission, Scanner scan){
 		
 		players_on_mission = on_mission;

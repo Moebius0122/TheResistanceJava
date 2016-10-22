@@ -11,6 +11,7 @@ public class UserPlayer extends Player {
 		
 		super(isspy, playerid, otherspy);
 		
+		//Let the player know of the role and the rules.
 		if(is_spy){
 			
 			System.out.println("Player " + (player_id+1) + ", you are a spy inside the resistance.");

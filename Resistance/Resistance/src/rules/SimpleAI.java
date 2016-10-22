@@ -81,8 +81,8 @@ public class SimpleAI extends Player {
 				SecondPlayer = rand.nextInt(5);
 				
 			}while(other_spy == SecondPlayer||SecondPlayer==-1|| SecondPlayer==player_id);
-				//Nominate a different random non-spy.
-			do{
+				
+			do{//Nominate a different random non-spy.
 				
 				ThirdPlayer = rand.nextInt(5);
 				
